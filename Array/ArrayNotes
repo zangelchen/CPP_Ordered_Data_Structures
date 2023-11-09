@@ -1,0 +1,3 @@
+sizeof()  -> to Find the byte size of each object in the array
+    ex) sizeof(Cube)
+    
