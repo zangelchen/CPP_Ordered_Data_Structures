@@ -1,0 +1,67 @@
+There is a mathematical approach to analyzing the run times
+
+************************************ ARRAY VS LINKED LIST ******************************************
+
+Array is always O(1) where O is n pieces of data 
+Linked List has to go in order from header_ to nullptr, so the run time is to the n
+
+                     Array             Linked List
+Access[3]         1 operation         3 operations
+Access[4000]      1 operation        4000 operations
+
+ANALYZE RUN TIME FOR INCREASING ARRAY SIZE
+
+-----------------------METHOD 1: ADD 2 EACH TIME WE NEED TO INCREASE ---------------------------------
+
+Resize #         #Array         #of copies   Formula
+0               [][]                0         2*0
+1               [][][*][*]          2         2*1
+2               [][][*][*][*][*]    4         2*2
+n               [][][*]...[.*][*]   2r        2r
+
+r = number of copies
+n = number of items in the array
+r=n/2
+
+Total number of copies: Summation of 2k = 2(r(r+1)/2) = r^2 + 2
+Total number of copies in terms of n = (n/2)^2 + n/2 = (n^2 + 2n)/4
+
+Big-O notation O(n^2) <- takes the largest exponent 
+
+----------------- METHOD 2: DOUBLE EACH TIME WE NEED TO INCREASE ARRAY SIZE ----------------------------
+
+Resize #         #Array             #of copies   Formula
+0               [][]                    0         2*0
+1               [][][*][*]              2         2*1
+2               [][][][][*][*][*][*]    4         2*2
+n               [][]...........[*][*]   2^r       2^r
+
+r = number of copies
+n = number of items in the array
+r= lg(n)
+
+Total number of copies: Summation of 2k = 2*(2^r-1) 
+Total number of copies in terms of n = 2*(2^(lg(n))-1)  = 2(n-1)
+
+Big-O notation O(n) <- takes the largest exponent 
+
+------------------------------------------- CONCLUSION -------------------------------------------------
+
+METHOD 1 BIG O is O(n^2)
+METHOD 2 BIG O is O(n)
+
+SAVES TIME TO RUN IT BY DOUBLING
+
+
+
+********************************* RUN TIME FOR INSERT AT FRONT VS INSERT AT END ****************************
+
+                                          Array    List     Array                                                           List
+Access an index in the collection          O(1)     O(n)    Direct access via offset formula                                Look through one by one
+Insert at FRONT                            O(1)*    O(1)    Amortized constant time when array is doubled when copied       Three lines of code to insert, move pointer to front, move header to the front
+Find a Data in the collection              O(n)     O(n)    Look through one by one                                         Look through one by one
+Insert AFTER                               O(n)     O(1)    Copy up to half the array to make space for the new element     Fixed constant time (just need to link and unlink)
+
+
+FIND DATA IN A SORTED ARRAY (it's organized from increase/decrease or vice versa)
+Run time is O(lg(n)) because you can look at the middle item, half that, then half that until you find the number you want
